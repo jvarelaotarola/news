@@ -1,0 +1,44 @@
+<h1>{{ title }}</h1>
+<form (ngSubmit)="onSubmit()" #userForm="ngForm">
+    <div class="form-group">
+      <label for="name">Name</label>
+      <input type="text" class="form-control" id="name"
+      required
+      [(ngModel)]="user.name" name="name"
+      #name="ngModel">
+      <div [hidden]="name.valid || name.pristine" class="alert alert-danger">
+        <div *ngIf="name.errors && name.errors.required">
+          El name es requerido
+        </div>
+        <div *ngIf="name.errors && name.errors.textContains">
+          El texto no incluye {{requiredText}}
+        </div>
+      </div>
+    </div>
+  
+    <div class="form-group">
+      <label for="email">email</label>
+      <input type="text" 
+        class="form-control" 
+        id="email" name="email"
+        [(ngModel)]="user.email"  
+        #email="ngModel" 
+        required pattern="[0-9]*">
+      <div [hidden]="email.valid || email.pristine" class="alert alert-danger" *ngIf="email.errors && email.errors.required">
+        El email es requerido
+      </div>
+      <div [hidden]="email.valid || email.pristine" class="alert alert-danger" *ngIf="email.errors && email.errors.pattern">
+        El email debe de tener el formato correcto.
+      </div>
+    </div>
+    <select
+      [(ngModel)]="userType"
+      [ngModelOptions]="{standalone: true}">
+      <option value="author">Author</option>
+      <option value="reader">Reader</option>
+    </select>
+    
+    <button type="submit" class="btn btn-success" [disabled]="!userForm.form.valid" *ngIf="!isUpdating">Add</button>
+	<button type="submit" class="btn btn-success" [disabled]="!userForm.form.valid" *ngIf="isUpdating">Edit</button>
+	<button type="button" class="btn btn-default" (click)="newUser(); userForm.reset()">New User</button>
+  </form>

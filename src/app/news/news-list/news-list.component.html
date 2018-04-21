@@ -1,0 +1,12 @@
+<h1>{{title | uppercase}}</h1>
+
+<div *ngFor="let news of newsList">
+  <ul>
+    <li>
+      <label><strong>Title: </strong>{{news.title}}</label>
+    </li>
+    <li>
+      <label>{{ news.body }}</label>
+    </li>
+  </ul>
+</div>
