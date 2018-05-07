@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { UsersService } from '../users.service';
+import { User } from '../user';
 
 @Component({
   selector: 'app-user-list',
@@ -8,16 +9,25 @@ import { UsersService } from '../users.service';
 })
 export class UserListComponent implements OnInit {
 
-  private title: string;
-  private readersList: any;
+  @Input() user : User;
+	@Output() deleteUser = new EventEmitter<User>();
+	@Output() editUser = new EventEmitter<User>();
+	public isDeleting = false;
 
-  constructor(private usersService: UsersService) {
-    this.title = 'Readers List';
-   }
+	constructor(private productosService:UsersService) { }
 
-  ngOnInit() {
-    this.readersList = this.usersService.getReaders();
-    console.log('readers list: ', this.readersList);
-  }
+	ngOnInit() {
+		
+	}
+
+	delete(){
+		this.isDeleting = true;
+		this.deleteUser.emit(this.user);
+	}
+
+
+	edit(){
+		this.editUser.emit(this.user);
+	}
 
 }

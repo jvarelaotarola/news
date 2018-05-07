@@ -1,10 +1,20 @@
-<h1>{{title}}</h1>
-
-<div *ngFor="let reader of readersList">
-  <div>
-    <label><strong>Name: </strong>{{reader.name}}</label>
+<div class="row">
+	<div class="col-9">
+		<div class="row">
+    <label><strong>Name: </strong>{{user.name}}</label>
   </div>
-  <div>
-    <label><strong>Email: </strong>{{reader.email}}</label>
+  <div class="row">
+    <label><strong>Email: </strong>{{user.email}}</label>
   </div>
+</div>
+<div class="col-3 actions">
+  <div class="row">
+    <div class="col-12 text-center">
+      <button type="button" class="btn btn-primary" (click)="edit()">Edit</button>
+    </div>
+    <div class="col-12 text-center">
+      <button type="button" class="btn btn-danger" (click)="delete()"><span *ngIf="isDeleting">...</span><span *ngIf="!isDeleting">Delete</span></button>
+    </div>
+  </div>
+</div>
 </div>

@@ -1,2 +1,18 @@
-<app-user-list></app-user-list>
-<app-user-add></app-user-add>
+<div class="users">
+	<div class="page-title row">
+		<h2 class="col-5">Users</h2>
+	</div>
+	<div class="users row">
+		<ul class="col-6">
+			<li *ngFor="let user of users" class="row user-display">
+				<app-user-list [user]='user' (deleteUser)="deleteUser($event)" (editUser)="editUser($event)" class="col-12 card"></app-user-list>
+			</li>
+		</ul>	
+		<ul class="col-4 offset-1">
+			<app-user-add (addUser)="addUser($event)" (editUser)="editUserSave($event)" [selectedUser]="selectedUser" [canAdd]='!loading'></app-user-add>
+			<div *ngIf="loading">
+				loading...
+			</div>
+		</ul>
+	</div>
+</div>

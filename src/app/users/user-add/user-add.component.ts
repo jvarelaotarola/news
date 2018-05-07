@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input, OnChanges } from '@angular/core';
 import { User } from '../user';
 
 @Component({
@@ -8,43 +8,44 @@ import { User } from '../user';
 })
 export class UserAddComponent implements OnInit {
 
-  submitted = false;
-  isUpdating = false;
-  userType = '';
-  title: string;
-  requiredText : string = 'producto';
-  user: any = {};
+	@Output() addUser = new EventEmitter<any>();
+	@Output() editUser = new EventEmitter<any>();
+	@Input() canAdd : boolean = true;
+	@Input('selectedUser') user : User = new User();
+	submitted = false;
+	requiredText : string = 'user';
+	isEditing = false;
 
-  onSubmit() {
-		if(this.isUpdating){
-			console.log('editing');
-
+	onSubmit(userForm) {
+		if(this.isEditing){
+			this.editUser.emit({
+				'user':this.user,
+				'form':userForm
+			});
+			this.isEditing = false;
 		} else {
-
-			console.log('add');
+			this.addUser.emit({
+				'user':this.user,
+				'form':userForm
+			});
 		}
 		this.submitted = true; 
 	}
 
-	constructor() {
-    this.user.name = '';
-    this.user.email = '';
-    this.title = 'Add a new User';
-   }
+	constructor() { }
 
 	ngOnInit() {
 	}
 
 	ngOnChanges(changes){
-		console.log('changes',changes);
 		if(changes.email && changes.user.currentValue.email){
-			this.isUpdating = true;
+			this.isEditing = true;
 		}
 	}
 
 	newUser(user){
 		this.submitted = false; 
-		this.isUpdating = false;
+		this.isEditing = false;
     
 	}
 

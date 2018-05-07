@@ -1,6 +1,6 @@
 export class User {
 
-    public id?: number;
+    public _id: string = undefined;
     public name = '';
     public email = '';
 
