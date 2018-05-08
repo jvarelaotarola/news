@@ -1,10 +1,33 @@
-<form>
-  Title:<br>
-  <input type="text" name="title">
-  <br>
-  Body:<br>
-  <textarea rows="4" cols="50">
-  </textarea>
-  <br><br>
-  <input type="submit" value="Submit">
-</form> 
+<form [formGroup]="articleForm" (ngSubmit)="onSubmit()" novalidate>
+	<div class="form-group">
+		<label class="center-block">Title
+			<input class="form-control" formControlName="title" [attr.disabled]="isEditing?'':null">
+		</label>
+		<div *ngIf="!articleForm.controls['title'].valid && (articleForm.controls['title'].dirty || articleForm.controls['title'].touched)" class="alert alert-danger">
+			<div *ngIf="articleForm.controls['title'].errors.required">
+				El article es requerido
+			</div>
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="center-block">Body
+			<input class="form-control" formControlName="title">
+		</label>
+		<div *ngIf="!articleForm.controls['title'].valid && (articleForm.controls['title'].dirty || articleForm.controls['title'].touched)" class="alert alert-danger">
+			<div *ngIf="articleForm.controls['title'].errors.required">
+				Body is required
+			</div>
+			<div *ngIf="articleForm.controls['title'].errors.minlength">
+				Body should be of at least 100 characters.
+			</div>
+			<div *ngIf="articleForm.controls['title'].errors.maxlength">
+				Body can not be of more than 1000 characters.
+			</div>
+		</div>
+	</div>
+	<div>
+		<button type="submit"
+		[disabled]="articleForm.invalid " class="btn btn-success"><span *ngIf="!isEditing">Agregar</span><span *ngIf="isEditing">Editar</span></button> &nbsp;
+		<button type="reset" (click)="revert()" class="btn btn-danger">Revert</button>
+	</div>
+</form>

@@ -1,5 +1,21 @@
-<div *ngFor="let news of newsList">
-  <app-news-list [newsList]="news"></app-news-list>
+<div class="usuario">
+	<div class="page-title row">
+		<h2 class="col-5">News</h2>
+	</div>
+	<div class="articles row">
+		<ul class="col-6">
+			<li *ngFor="let article of articles" class="row article-display">
+				<app-news-list [article]='article' 
+				(deleteArticle)="deleteArticle($event)" 
+				(editArticle)="editArticle($event)" class="col-12 card">
+				</app-news-list>
+			</li>
+		</ul>	
+		<ul class="col-4 offset-1">
+			<app-news-add (addArticle)="addArticle($event)" (editArticle)="editArticleSave($event)" [selectedArticle]="selectedArticle" [canAdd]='!loading'></app-news-add>
+			<div *ngIf="loading">
+				loading...
+			</div>
+		</ul>
+	</div>
 </div>
-
-<app-news-add></app-news-add>

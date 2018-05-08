@@ -1,4 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { NewsService } from '../news.service';
+import { Article } from '../article';
 
 @Component({
   selector: 'app-news-list',
@@ -7,17 +9,24 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class NewsListComponent implements OnInit {
 
-  @Input() newsList: any;
-  private title = ' news';
+  @Input() article : Article;
+	@Output() deleteArticle = new EventEmitter<Article>();
+	@Output() editArticle = new EventEmitter<Article>();
+	public isDeleting = false;
 
-  constructor() {
-  }
+	constructor(private newsService:NewsService) { }
 
-  private setTitle():void {
-    this.title = this.newsList[0].topic + this.title;
-  }
+	ngOnInit() {
+		
+	}
 
-  ngOnInit() {
-    this.setTitle();
-  }
+	delete(){
+		this.isDeleting = true;
+		this.deleteArticle.emit(this.article);
+	}
+
+
+	edit(){
+		this.editArticle.emit(this.article);
+	}
 }
