@@ -6,6 +6,9 @@ import { NewsAddComponent } from './news-add/news-add.component';
 import { NewsListComponent } from './news-list/news-list.component';
 import { NewsService } from './news.service';
 import { NewsRoutingModule } from './news-routing.module';
+import { CategoryComponent } from './category/category.component';
+import { CategoryDescriptionPipe } from './category-description.pipe';
+import { CategoryColorDirective } from './category-color.directive';
 
 @NgModule({
   imports: [
@@ -15,6 +18,6 @@ import { NewsRoutingModule } from './news-routing.module';
     NewsRoutingModule
   ],
   providers: [NewsService],
-  declarations: [NewsComponent, NewsAddComponent, NewsListComponent]
+  declarations: [NewsComponent, NewsAddComponent, NewsListComponent, CategoryComponent, CategoryDescriptionPipe, CategoryColorDirective]
 })
 export class NewsModule { }

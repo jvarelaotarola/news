@@ -1,5 +1,6 @@
 import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
+import { CategoryComponent } from '../category/category.component';
 import { Article } from '../article';
 
 @Component({
@@ -27,14 +28,17 @@ export class NewsAddComponent implements OnInit {
 		this.articleForm = this.formBuilder.group({
 			_id: new FormControl(undefined),
 			title: new FormControl('', [
-        Validators.required,
-        Validators.minLength(20), 
+				Validators.required,
+				Validators.minLength(20), 
 				Validators.maxLength(100)
       ]),
 			body: new FormControl('', [
 				Validators.required, 
 				Validators.minLength(100), 
 				Validators.maxLength(2000)
+			]),
+			category: new FormControl('', [
+				Validators.required
 			])
 		});
 	}

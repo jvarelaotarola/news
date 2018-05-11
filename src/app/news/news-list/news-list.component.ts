@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { NewsService } from '../news.service';
+import { CategoryColorDirective } from '../category-color.directive';
 import { Article } from '../article';
 
 @Component({
