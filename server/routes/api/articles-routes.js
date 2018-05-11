@@ -41,7 +41,7 @@ function updateArticles(request, response) {
 }
 
 function postArticles(request, response) {
-    console.log('POST article');
+    console.log('POST article', request.body);
     var result;
     try {
         result = await (service.articlesService.postArticle(request.body.article));

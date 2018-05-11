@@ -25,6 +25,7 @@ export class NewsComponent implements OnInit {
 	}
 
 	public editArticleSave(article){
+		console.log('edit save',article);
 		this.newsService.editArticle(article.article)
 			.then(data => {
 				article.form.reset();
@@ -48,7 +49,7 @@ export class NewsComponent implements OnInit {
 	public getArticles(){
 		this.newsService.getArticles().subscribe((data) => {
 				console.log('data',data);
-				this.articles = data.user;
+				this.articles = data.article;
 			});
 	}
 

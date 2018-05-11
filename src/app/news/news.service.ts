@@ -8,12 +8,12 @@ export class NewsService {
   constructor(private dataService:DataService) { }
 
 	public getArticles(){
-		return this.dataService.get('/api/users');
+		return this.dataService.get('/api/articles');
 	}
 
 	public addArticle(article:Article){
-		console.log('article');
-		return this.dataService.post('/api/articles',{'user':article});
+		console.log('add article', article);
+		return this.dataService.post('/api/articles',{'article':article});
 	}
 
 	public deleteArticle(article:Article){
@@ -21,6 +21,7 @@ export class NewsService {
 	}
 
 	public editArticle(article:Article){
+		console.log('edit', article);
 		return this.dataService.put('/api/articles/'+article._id,{'article':article});
 	}
 

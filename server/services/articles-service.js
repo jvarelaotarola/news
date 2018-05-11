@@ -1,7 +1,7 @@
 'use strict';
 var async = require('asyncawait/async');
 var await = require('asyncawait/await');
-var ArticlesRsrc = require(__base + 'server/infrastructure/resources').articles;
+var ArticlesRsrc = require(__base + 'server/infrastructure/resources').article;
 
 function getArticle(id) {
     var result;
@@ -10,7 +10,7 @@ function getArticle(id) {
     	if(id){
         	result = await (ArticlesRsrc.getArticle(id));
         } else {
-        	result = await (ArticlessRsrc.getArticles());
+        	result = await (ArticlesRsrc.getArticles());
         }   
     } catch(error) {
         throw error;

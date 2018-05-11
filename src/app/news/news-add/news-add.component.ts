@@ -29,21 +29,23 @@ export class NewsAddComponent implements OnInit {
 			title: new FormControl('', [
         Validators.required,
         Validators.minLength(20), 
-				Validators.maxLength(50)
+				Validators.maxLength(100)
       ]),
 			body: new FormControl('', [
 				Validators.required, 
 				Validators.minLength(100), 
-				Validators.maxLength(1000)
+				Validators.maxLength(2000)
 			])
 		});
 	}
 
 	onSubmit() {
 		if(this.isEditing){
+			console.log('news-add edit', this.articleForm.value);
 			this.editArticle.emit({article:this.articleForm.value,form:this.articleForm});
 			this.isEditing = false;
 		} else {
+			console.log('add', this.articleForm.value);
 			this.addArticle.emit({article:this.articleForm.value,form:this.articleForm});
 		}
 		this.submitted = true; 

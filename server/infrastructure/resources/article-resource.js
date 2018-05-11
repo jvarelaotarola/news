@@ -23,6 +23,7 @@ function updateArticle(articleParam) {
 }
 
 function addArticle(articleParam) {
+    console.log('articleParam', articleParam);
     var article = await(articleModel.create(articleParam));
     return article;
 }
