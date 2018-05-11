@@ -38,6 +38,7 @@ export class UserAddComponent implements OnInit {
 	constructor() { }
 
 	ngOnInit() {
+		this.user.type = 'reader';
 	}
 
 	ngOnChanges(changes){
