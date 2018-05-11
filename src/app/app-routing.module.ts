@@ -1,7 +1,9 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { RouterModule, Routes, PreloadAllModules } from '@angular/router';
+import { NewsComponent } from './news/news/news.component';
+import { UserComponent } from './users/user/user.component';
 
-const routes: Routes = [
+const ROUTES: Routes = [
   {
     path: 'users',
     loadChildren: 'app/users/users.module#UsersModule'
@@ -11,14 +13,24 @@ const routes: Routes = [
     loadChildren: 'app/news/news.module#NewsModule'
   },
   {
-    path: '',
-    redirectTo: '',
-    pathMatch: 'full'
+    path: '**', 
+    redirectTo: ''
   }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  imports: [
+    RouterModule.forRoot(
+        ROUTES,
+        { 
+            preloadingStrategy: PreloadAllModules, 
+            useHash: true
+        }
+    )
+  ],
+  exports: [
+      RouterModule
+  ],
+  providers: []
 })
 export class AppRoutingModule { }

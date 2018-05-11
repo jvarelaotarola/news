@@ -14,50 +14,51 @@ export class UserComponent implements OnInit, AfterViewInit {
 	constructor(private userService: UsersService) { }
 
 	ngOnInit() {
-		this.obtenerProductos();
+		this.getUsers();
 	}
 
-	public editUser(producto){
-		console.log('edit',producto);
-		this.selectedUser = Object.assign({}, producto);
+	public editUser(user){
+		console.log('edit',user);
+		this.selectedUser = Object.assign({}, user);
 	}
 
-	public editUserSave(producto){
-		this.userService.editUser(producto.producto)
+	public editUserSave(user){
+		this.userService.editUser(user.user)
 			.then(data => {
-				this.obtenerProductos();
+				this.getUsers();
 			})
 			.catch(error => {
 				console.log('error',error);
 			});
 	}
 
-	public borrarProducto(producto){
-		this.userService.editUser(producto)
+	public deleteUser(user){
+		console.log('delete', user);
+		this.userService.deleteUser(user)
 			.then(data => {
-				this.obtenerProductos();
+				this.getUsers();
 			})
 			.catch(error => {
 				console.log('error',error);
 			});
 	}
 
-	public obtenerProductos(){
+	public getUsers(){
 		this.userService.getUsers().subscribe((data) => {
-				this.users = data.product;
+				this.users = data.user;
 			},(error)=>{
 				console.log('error',error);
 			});
 	}
 
-	public agregarProducto(producto:any){
+	public addUser(user:any){
 		this.loading = true;
-		this.userService.addUser(producto.producto)
+		this.userService.addUser(user.user)
 			.then(data => {
 				console.log('user added.');
-				producto.form.reset();
+				user.form.reset();
 				this.loading = false;
-				this.obtenerProductos();
+				this.getUsers();
 			})
 			.catch(error => {
 				console.log('error',error);

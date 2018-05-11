@@ -17,13 +17,16 @@ export class UserAddComponent implements OnInit {
 	isEditing = false;
 
 	onSubmit(userForm) {
+		console.log('from submittion.');
 		if(this.isEditing){
+			console.log('Will edit this user: ', this.user.name);
 			this.editUser.emit({
 				'user':this.user,
 				'form':userForm
 			});
 			this.isEditing = false;
 		} else {
+			console.log('Will add this user: ', this.user.name);
 			this.addUser.emit({
 				'user':this.user,
 				'form':userForm
@@ -38,7 +41,9 @@ export class UserAddComponent implements OnInit {
 	}
 
 	ngOnChanges(changes){
-		if(changes.email && changes.user.currentValue.email){
+		console.log('changes',changes)
+		if(changes.user && changes.user.currentValue._id){
+			console.log('is editing');
 			this.isEditing = true;
 		}
 	}
@@ -46,7 +51,7 @@ export class UserAddComponent implements OnInit {
 	newUser(user){
 		this.submitted = false; 
 		this.isEditing = false;
-    
+		this.user = new User();
 	}
 
 }

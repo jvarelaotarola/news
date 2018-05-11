@@ -11,19 +11,21 @@ export class UsersService {
   constructor(private dataService:DataService) { }
 
 	public getUsers(){
-		return this.dataService.get('/api/products');
+		return this.dataService.get('/api/users');
 	}
 
 	public addUser(user:User){
-		return this.dataService.post('/api/products',{'product':user});
+		console.log('addUser: ', user);
+		return this.dataService.post('/api/users',{'user':user});
 	}
 
 	public deleteUser(user:User){
-		return this.dataService.delete('/api/products/'+user._id);
+		return this.dataService.delete('/api/users/'+user._id);
 	}
 
 	public editUser(user:User){
-		return this.dataService.put('/api/products/'+user._id,{'product':user});
+		console.log('editUser: ', user);
+		return this.dataService.put('/api/users/'+user._id,{'user':user});
 	}
 
 }

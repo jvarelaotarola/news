@@ -1,5 +1,5 @@
 <h1>{{ title }}</h1>
-<form (ngSubmit)="onSubmit()" #userForm="ngForm">
+<form (ngSubmit)="onSubmit(userForm)" #userForm="ngForm">
     <div class="form-group">
       <label for="name">Name</label>
       <input type="text" class="form-control" id="name"
@@ -38,7 +38,6 @@
       <option value="reader">Reader</option>
     </select>
     
-    <button type="submit" class="btn btn-success" [disabled]="!userForm.form.valid" *ngIf="!isEditing">Add</button>
-	<button type="submit" class="btn btn-success" [disabled]="!userForm.form.valid" *ngIf="isEditing">Edit</button>
-	<button type="button" class="btn btn-default" (click)="newUser(); userForm.reset()">New User</button>
+    <button type="submit" class="btn btn-success" [disabled]="!userForm.form.valid || !canAdd"><span *ngIf="!isEditing">Add</span><span *ngIf="isEditing">Edit</span></button>
+	  <button type="button" class="btn btn-danger" (click)="newUser(); userForm.reset()">Revert</button>
   </form>

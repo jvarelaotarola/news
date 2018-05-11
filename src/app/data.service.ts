@@ -39,7 +39,8 @@ export class DataService {
 
 
     public post(url: string, element: any): Promise<any> {
-        return this.http.post(url, JSON.stringify(element))
+        console.log('post element', element);
+        return this.http.post(url, element)
             .toPromise()
             .then(response => response.json() as any)
             .catch(this.handleError);
@@ -47,7 +48,7 @@ export class DataService {
 
     public put(url: string, element: any): Promise<any> {
         console.log('element',element);
-        return this.http.put(url, JSON.stringify(element))
+        return this.http.put(url, element)
             .toPromise()
             .then(response => response.json() as any)
             .catch(this.handleError);

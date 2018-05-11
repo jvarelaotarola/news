@@ -21,6 +21,7 @@ export class UserListComponent implements OnInit {
 	}
 
 	delete(){
+		console.log('User deleting');
 		this.isDeleting = true;
 		this.deleteUser.emit(this.user);
 	}
